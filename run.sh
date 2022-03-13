@@ -1,0 +1,1 @@
+python bin/main.py config/base_config.json

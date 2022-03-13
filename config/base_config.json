@@ -1,0 +1,18 @@
+{
+    "stock_list":["sh.600000"],
+    
+    "train_period":["20200101-20200131"],
+    "test_period":["20200201-20200228"],
+    
+    "use_factor":["baostock_base"],
+    "factor_corr_thresh":[1],
+    "trade_strategy":["base_strategy"],
+    "train_model":["rf"],
+    
+    "logging_home":"/home/mokou/SPP/log",
+    "logging_level":10,
+    
+    "factor_home":"/home/mokou/SPP/factor",
+    "model_home":"/home/mokou/SPP/model",
+    "rawdata_home":"/home/mokou/SPP/rawdata"
+}
