@@ -5,9 +5,9 @@
 - Introduction
 - Modules
     - Download Data
-    - Generate Factors (generate and normalize)
-    - Load Factors
-    - Select Factors (remove similar factors using correlation)
+    - Generate Factor (generate and normalize)
+    - Load Factor
+    - Select Factor (remove similar factor using correlation)
     - Trade Strategy
     - Train Model (regress/LSTM)
     - Back Test

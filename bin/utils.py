@@ -7,6 +7,8 @@ import os
 import sys
 import logging
 import re
+from sklearn.preprocessing import MinMaxScaler
+
 
 class Config():
     def __init__(self, config_filepath):
@@ -18,7 +20,7 @@ class Config():
         
         # without a complex pattern checking
         # will update it when everything is solid
-        self.stock_list = config_dict['stock_list']
+        self.stock_list_file = config_dict['stock_list_file']
         
         self.train_period = config_dict['train_period']
         self.test_period = config_dict['test_period']

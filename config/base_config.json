@@ -1,10 +1,10 @@
 {
-    "stock_list":["sh.600000"],
+    "stock_list_file":"/home/mokou/SPP/stocklist/test_stock_list_v0.json",
     
     "train_period":["20200101-20200131"],
-    "test_period":["20200201-20200228"],
+    "test_period":["20210201-20210228"],
     
-    "use_factor":["baostock_base"],
+    "use_factor":["baostock"],
     "factor_corr_thresh":[1],
     "trade_strategy":["base_strategy"],
     "train_model":["rf"],

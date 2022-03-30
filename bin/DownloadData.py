@@ -6,10 +6,16 @@ import baostock as bs
 class DownloadData():
     def __init__(self, config):
         self.config = config
-        self.baostock_lg = None
+        # get stock list
+        with open(self.config.stock_list_file, 'r') as f:
+            self.stock_list = json.load(f)
         
-    
     def download_baostock(self, stock_list, year_list):
+        # logging in
+        baostock_lg = bs.login()
+        logging.debug(baostock_lg.error_code)
+        logging.debug(baostock_lg.error_msg)
+
         logging.info('start to download baostock')
         # generate rs according to stock_list and date_list
         for stock_code in stock_list:
@@ -21,7 +27,7 @@ class DownloadData():
                 end_date = '-'.join([year, '12', '31'])
                 
                 rs = bs.query_history_k_data(stock_code,
-                                            "date,code,open,high,low,close,preclose,volume,amount,adjustflag\
+                                            "date,open,high,low,close,preclose,volume,amount\
                                             ,turn,tradestatus,pctChg,peTTM,psTTM,pcfNcfTTM,pbMRQ,isST",
                                             start_date=start_date, end_date=end_date,
                                             frequency="d", adjustflag="2") 
@@ -35,7 +41,8 @@ class DownloadData():
                 # generate this_filename
                 this_filename = '_'.join([stock_code, year]) + '.csv'
                 result.to_csv(os.path.join(self.config.rawdata_home, this_filename), encoding="gbk", index=False)
-        
+
+        bs.logout()
         logging.info('end.')
     
     def get_year_list(self):
@@ -53,15 +60,13 @@ class DownloadData():
         
         logging.info('start all download')
         
-        # baostock
-        self.baostock_lg = bs.login()
-        logging.debug(self.baostock_lg.error_code)
-        logging.debug(self.baostock_lg.error_msg)
-        self.download_baostock(self.config.stock_list, year_list)
-        bs.logout()
-        
-        # other data source
-        pass
+        # check use_factor
+        for u_factor in self.config.use_factor:
+            if u_factor == 'baostock':
+                self.download_baostock(self.stock_list, year_list)
+            else:
+                # other data source
+                pass
     
         logging.info('finish all download')
         
@@ -72,4 +77,4 @@ if __name__ == '__main__':
     download_data = DownloadData(config)
     download_data.run()
     
-    
+
